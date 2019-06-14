@@ -467,9 +467,23 @@ def delete_todo(current_user, todo_id):
     db.session.commit()
 
     return jsonify({'message': 'Todo item deleted!'})
+
 @app.route('/',methods=['post','get'])
+def home():
+    return render_template('home.html')
+
+@app.route('/report',methods=['post','get'])
 def index():
-    return render_template("index.html")
+    return render_template("index.html",agency_id=None)
+
+@app.route('/report/get_id',methods=['POST'])
+def getAgencyId():
+    if request.method == 'POST':
+        a_id = request.form['agency_id']
+        print(a_id)
+        return render_template("index.html",agency_id=a_id)
+    else:
+        return render_template("index.html", agency_id=None)
 
 @app.route('/agency/<agency_id>',methods=['GET'])
 def get_by_agency(agency_id):

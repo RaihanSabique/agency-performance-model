@@ -44,12 +44,12 @@
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li ><a  href="/"><em class="fa fa-table">&nbsp;</em> Data Set</a></li>
+			<li class="active"><a  href="/"><em class="fa fa-table">&nbsp;</em> Data Set</a></li>
 			<li class="parent "><a data-toggle="collapse" >
 				<em class="fa fa-bar-chart">&nbsp;</em> Agency Report <span data-toggle="collapse"  class="icon-pull-right"></span>
 				</a>
 				<ul class="children-collapse" >
-					<li><a class="active" href="/report">
+					<li><a class="" href="/report">
 						<span class="fa fa-arrow-right">&nbsp;</span> By Agency ID
 					</a></li>
 					<li><a class="" href="#">
@@ -68,31 +68,34 @@
 	</div><!--/.sidebar-->
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-        <div class="row">
-
-            <form action = "http://127.0.0.1:5000/report/get_id" method = "POST">
-			    <div class="form-group">
-					<p>Analyzing by Agency ID</p>
-				    <input name="agency_id"  type="number"  placeholder="Enter Agency id" value={{agency_id}}>
-					<button onclick="setAgencyId()" class="btn btn-primary btn-md"  type="submit">Get Result</button>
-			    </div>
-		    </form>
+         <div class="row" id="dataloader" >
         </div>
-		<div>
-			<g class="tooltip">
-    			<text class="name">{{ agency_id }}</text>
-			</g>
-		</div>
-		<div id="state_text" class="=row">
-
-		</div>
-		 <div class="row" id="state_bar"></div>
 	</div>
 
-    <script src="http://d3js.org/d3.v4.min.js"></script>
-    {% assets "index_js" %}
-            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+	<script type="text/javascript"charset="utf-8">
+    d3.text("srccode/dataset/data.csv", function(data) {
+    var parsedCSV = d3.csv.parseRows(data);
+
+    var container = d3.select("#dataloader")
+        .append("table")
+
+    .selectAll("tr")
+        .data(parsedCSV).enter()
+        .append("tr")
+
+    .selectAll("td")
+        .data(function(d) {
+            return d;
+        }).enter()
+        .append("td")
+        .text(function(d) {
+            return d;
+        });
+});
+        </script>
+
 
 </body>
 </html>

@@ -23,7 +23,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Agency Performance</span>Analysis</a>
+				<a class="navbar-brand" href="#"><span>Agency Performance</span>Model</a>
 				<ul class="nav navbar-top-links navbar-right">
 
 
@@ -44,7 +44,8 @@
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu">
-			<li class="active"><a  href="/"><em class="fa fa-table">&nbsp;</em> Data Set</a></li>
+            <li class="active"><a ><em class="fa fa-home">&nbsp;</em> Home</a></li>
+			<li ><a  href="/data_set"><em class="fa fa-table">&nbsp;</em> Data Set</a></li>
 			<li class="parent "><a data-toggle="collapse" >
 				<em class="fa fa-bar-chart">&nbsp;</em> Agency Report <span data-toggle="collapse"  class="icon-pull-right"></span>
 				</a>
@@ -66,36 +67,71 @@
 			<li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
 		</ul>
 	</div><!--/.sidebar-->
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main" style="background-color:#FAF5F2">
 
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-         <div class="row" id="dataloader" >
-        </div>
-	</div>
+              <div class="call-to-action light-gray-bg p-20 hc-shadow bordered">
+                 <div style="background-color:#123638">
+                <h1 class="text-center" style="color: white;">The Project - Insurance Data analysis</h1>
+                <div class="separator"></div>
+                <p class="lead text-center"><strong>A <a target="_blank" rel="noopener noreferrer" href="https://www.britecore.com/">britecore.com</a> project</strong> </p>
+                <br>
+                <br></div>
+                  <div class="row">
+                      <h2 class="text-center"><u>Project Description</u></h2>
+                      <ul>
+                          <li>Build a Data Pipeline/ETL process that takes the CSVs as input and saves into a database at a detailed level while also calculating summarized views.</li>
+                          <li>Build REST api that provides:
+                                <ol>
+                                    <p>Parameters: agency_id, year, date, state </p>
+                                    <li>Detailed information using different parameters </li>
+                                    <li>Summarized information using different parameters</li>
+                                    <li>Graphical analysis information using different parameters</li>
+                                    <li>predictive analysis for categorization </li>
+                                </ol>
+                          </li>
+                          <li>Build a web app that consumes the API and show charts, tables, prediction results etc</li>
+                      </ul>
+                  </div>
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                      <span class="icon without-bg"><i class="fa fa-diamond"></i></span>
+                      <div class="body">
+                        <h4 class="title">Tools Stack</h4>
+                        <h5><strong>Python 3.7</strong></h5>
+                          <h5><strong>Java Scripts</strong></h5>
+                          <h5><strong>HTML5</strong></h5>
+                          <h5><strong>CSS</strong></h5>
 
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 
-	<script type="text/javascript"charset="utf-8">
-    d3.text("srccode/dataset/data.csv", function(data) {
-    var parsedCSV = d3.csv.parseRows(data);
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                      <span class="icon without-bg"><i class="fa fa-connectdevelop"></i></span>
+                      <div class="body">
+                        <h4 class="title">Frameworks</h4>
+                          <h5><strong>Flask</strong></h5>
+                          <h5><strong>D3 JS</strong></h5>
+                          <h5><strong>Bootstrap</strong></h5>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                      <span class="icon without-bg"><i class="fa fa-snowflake-o"></i></span>
+                      <div class="body">
+                        <h4 class="title">Data Analyzing and Modeling</h4>
+                          <h5><strong>Pandas DataFrame</strong></h5>
 
-    var container = d3.select("#dataloader")
-        .append("table")
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-    .selectAll("tr")
-        .data(parsedCSV).enter()
-        .append("tr")
-
-    .selectAll("td")
-        .data(function(d) {
-            return d;
-        }).enter()
-        .append("td")
-        .text(function(d) {
-            return d;
-        });
-});
-        </script>
-
+    </div>
 
 </body>
 </html>

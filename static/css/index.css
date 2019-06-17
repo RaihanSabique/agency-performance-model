@@ -1,6 +1,59 @@
 .bar-svg-component {
-    background-color: #95A8A2;
+
 }
 .bar-text-color{
     color: #95A8A2;
 }
+
+.widget_cbar {
+  height: 25vh;
+  width: 45px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.widget_pbar {
+  height: 20vh;
+  width: 40px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.progress-bar-1 {
+  fill: #2A3659;
+}
+.progress-bar-2 {
+  fill: #425944;
+}
+
+.progress-bar-bg {
+  fill: #BAF2E8;
+}
+
+.progress-label {
+  fill: #123638;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+
+.cl_text {
+    color: #2A3659;
+}
+
+.pl_text {
+    color: #425944;
+    font-size: 12px;
+}
+
+.prod_background{
+    background-color: #D9D5D2;
+}
+
+
+
+
+
+
+
+

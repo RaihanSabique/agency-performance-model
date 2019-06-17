@@ -472,6 +472,10 @@ def delete_todo(current_user, todo_id):
 def home():
     return render_template('home.html')
 
+@app.route('/data_set',methods=['post','get'])
+def dataset():
+    return render_template('data_set.html')
+
 @app.route('/report',methods=['post','get'])
 def index():
     return render_template("index.html",agency_id=None)
@@ -520,11 +524,16 @@ def get_by_agency(agency_id):
         s_data['STATE_ABBR'] = s.STATE_ABBR
         states_list.append(s_data)
     #print(states_list)
-    print(df_data)
+    #print(df_data)
+    result_list = []
     new_analysis=cntrl.manage(df_data,products_list,states_list)
     dict_state_result=new_analysis.get_state_analysis_result()
-    result_list=[]
     result_list.append(dict_state_result)
+    dict_product_line_result=new_analysis.get_product_line_result()
+    result_list.append(dict_product_line_result)
+    dict_pl_cl_result=new_analysis.get_pl_cl_product()
+    result_list.append(dict_pl_cl_result)
+
     json_result = json.dumps(
         result_list,
         default=lambda df: json.loads(df.to_json()))

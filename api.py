@@ -116,10 +116,10 @@ class Product(db.Model):
     state_abbreviation = relation(State_abbreviation)
 
 
-db.create_all()
-df = pd.read_csv("../srccode/dataset/finalapi.csv")
+#db.create_all()
+#df = pd.read_csv("../srccode/dataset/finalapi.csv")
 
-def insertProdAbbr():
+'''def insertProdAbbr():
     # df.read_csv("/srccode/dataset/finalapi.csv")
     prod_list = df.PROD_ABBR.unique()
     #Product_abbreviation.query.delete()
@@ -253,7 +253,7 @@ def getProduct():
     for p in prods:
         print(p.AGENCY_ID_PRIMARY,p.AGENCY_ID)
 
-
+'''
 #insertProdAbbr()
 #insertStateAbbr()
 #insertProduct()
@@ -560,5 +560,5 @@ def get_by_agency(agency_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
 

@@ -8,7 +8,7 @@ id=d3.select("g.tooltip > text.name").text();;
 
 
 
-d3.json('http://18.217.184.154/agency/'+id, function(data) {
+d3.json('http://ec2-18-217-184-154.us-east-2.compute.amazonaws.com/agency/'+id, function(data) {
     var mappedData = [];
     var nb_wrtn_prem_amt=[]
         total_wrtn_prem_amt=[]

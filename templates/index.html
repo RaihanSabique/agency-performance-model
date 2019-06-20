@@ -37,7 +37,7 @@
 				<img src="/static/img/pp.jpg" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Developer</div>
+				<div class="profile-usertitle-name">Developed By</div>
 				<div class="profile-usertitle-status">Raihan</div>
 			</div>
 			<div class="clear"></div>
@@ -61,10 +61,6 @@
 					</a></li>
 				</ul>
 			</li>
-            <li><a href="widgets.html"><em class="fa fa-calendar">&nbsp;</em> Widgets</a></li>
-			<li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
-			<li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
-			<li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
@@ -74,8 +70,15 @@
             <form action = "http://127.0.0.1:5000/report/get_id" method = "POST">
 			    <div class="form-group">
 					<strong>Agency ID:</strong>
-				    <span><input name="agency_id"  type="number"  placeholder="Enter Agency id" value={{agency_id}}>
-					<button onclick="setAgencyId()" class="btn btn-primary btn-md"  type="submit">Get Result</button></span>
+				    <span><select name="agency_id">
+							<option value="" disabled selected>Select Agency ID</option>
+							{% for each in agency_list %}
+						<option value="{{each}}" >{{each}}</option>
+
+							{% endfor %}
+
+						</select>
+					<button  class="btn btn-primary btn-md"  type="submit">Get Result</button></span>
 			    </div>
 		    </form>
 			</div>
@@ -106,6 +109,34 @@
 
 		</div>
 	</div>
+		<div class="row" style="background-color:#FFFFF0;">
+			<div class="row">
+				<h3 class="text-center"><u><strong>Year vs Different types of amount(USD)</strong></u> </h3>
+			</div>
+			<div class="col-sm-8 col-lg-8">
+				<svg id="visualisation" width="750" height="500" >
+
+				</svg>
+			</div>
+					<div class="col-sm-4 col-lg-4">
+
+					<span><svg height="5" width="30"><rect width="30" height="5" style="fill:green;" /></svg></span>
+						<span><h6 ><strong>New Business Written Premium Amount</strong></h6></span>
+					<svg height="5" width="30"><rect width="30" height="5" style="fill:#F3B900;" /></svg>
+						<span><h6 ><strong>Total Written Premium Amount</strong></h6></span>
+
+						<svg height="5" width="30"><rect width="30" height="5" style="fill:#26BFBF;" /></svg>
+						<span><h6 ><strong>Previous Written Premium Amount</strong></h6></span>
+
+					<svg height="5" width="30"><rect width="30" height="5" style="fill:#313A87;" /></svg>
+						<span><h6 ><strong>Earned Premium Amount</strong></h6></span>
+
+					<svg height="5" width="30"><rect width="30" height="5" style="fill:red;" /></svg>
+						<span><h6 ><strong>Losses Amount</strong></h6></span>
+
+					</div>
+		</div>
+
 
     <script src="http://d3js.org/d3.v4.min.js"></script>
     {% assets "index_js" %}

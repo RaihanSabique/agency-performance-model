@@ -13,6 +13,7 @@ import pandas as pd
 import pprint
 import json
 import analysis.controller as cntrl
+import analysis.data as data
 
 file_path = os.path.abspath(os.getcwd()) + "/database.db"
 print(file_path)
@@ -478,16 +479,27 @@ def dataset():
 
 @app.route('/report',methods=['post','get'])
 def index():
-    return render_template("index.html",agency_id=None)
+    products=Product.query.with_entities(Product.AGENCY_ID.distinct()).all()
+    #print(products)
+    agency_id_list=[]
+    for p in products:
+        agency_id_list.append(p[0])
+    print(agency_id_list)
+    return render_template("index.html",agency_id=None,agency_list=agency_id_list)
 
 @app.route('/report/get_id',methods=['POST'])
 def getAgencyId():
+    products = Product.query.with_entities(Product.AGENCY_ID.distinct()).all()
+    # print(products)
+    agency_id_list = []
+    for p in products:
+        agency_id_list.append(p[0])
     if request.method == 'POST':
         a_id = request.form['agency_id']
         print(a_id)
-        return render_template("index.html",agency_id=a_id)
+        return render_template("index.html",agency_id=a_id,agency_list=agency_id_list)
     else:
-        return render_template("index.html", agency_id=None)
+        return render_template("index.html", agency_id=None,agency_list=agency_id_list)
 
 @app.route('/agency/<agency_id>',methods=['GET'])
 def get_by_agency(agency_id):
@@ -501,7 +513,11 @@ def get_by_agency(agency_id):
         data_dict['prod_line'] = p.PROD_LINE
         data_dict['state_abbr_id'] = p.STATE_ABBR_ID
         data_dict['year'] = p.STAT_PROFILE_DATE_YEAR
-        data_dict['wrtn_prem_amt'] = p.WRTN_PREM_AMT
+        data_dict['nb_wrtn_prem_amt']=p.NB_WRTN_PREM_AMT
+        data_dict['total_wrtn_prem_amt'] = p.WRTN_PREM_AMT
+        data_dict['prev_wrtn_prem_amt']=p.PREV_WRTN_PREM_AMT
+        data_dict['ernd_prem_amt']=p. PRD_ERND_PREM_AMT
+        data_dict['losses_amt']=p.PRD_INCRD_LOSSES_AMT
         data_dict['loss_ratio'] = p.LOSS_RATIO_3YR
         data_dict['growth_rate'] = p.GROWTH_RATE_3YR
         df = pd.DataFrame([data_dict], columns=data_dict.keys())
@@ -534,6 +550,8 @@ def get_by_agency(agency_id):
     dict_pl_cl_result=new_analysis.get_pl_cl_product()
     result_list.append(dict_pl_cl_result)
 
+    amount_result=new_analysis.get_amount_analysis_result()
+    result_list.append(amount_result)
     json_result = json.dumps(
         result_list,
         default=lambda df: json.loads(df.to_json()))

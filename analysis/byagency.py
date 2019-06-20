@@ -28,6 +28,10 @@ def product_line(df):
     data_dict={}
     df_result = df.prod_line.value_counts()
     data_dict = df_result.to_dict()
+    if('CL' not in data_dict):
+        data_dict['CL'] = 0
+    if('PL' not in data_dict):
+        data_dict['PL'] = 0
     print(data_dict)
     total=data_dict['CL']+data_dict['PL']
     print(total)

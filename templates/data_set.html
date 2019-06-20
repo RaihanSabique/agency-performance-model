@@ -37,7 +37,7 @@
 				<img src="/static/img/pp.jpg" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Developer</div>
+				<div class="profile-usertitle-name">Developed By</div>
 				<div class="profile-usertitle-status">Raihan</div>
 			</div>
 			<div class="clear"></div>
@@ -61,10 +61,6 @@
 					</a></li>
 				</ul>
 			</li>
-            <li><a href="widgets.html"><em class="fa fa-calendar">&nbsp;</em> Widgets</a></li>
-			<li><a href="charts.html"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
-			<li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
-			<li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
@@ -78,9 +74,75 @@
 	</div>
 
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script>
 
 	<script type="text/javascript"charset="utf-8">
-    d3.text("https://raw.githubusercontent.com/RaihanSabique/agency-performance-model/master/dataset/data.csv", function(data) {
+
+	var chartConfig = {
+    target : 'dataloader',
+    data_url : 'https://raw.githubusercontent.com/RaihanSabique/agency-performance-model/master/dataset/data.csv',
+    width: 900,
+    height: 450,
+    val: 90
+};
+
+// loader settings
+var opts = {
+  lines: 9, // The number of lines to draw
+  length: 9, // The length of each line
+  width: 5, // The line thickness
+  radius: 14, // The radius of the inner circle
+  color: '#EE3124', // #rgb or #rrggbb or array of colors
+  speed: 1.9, // Rounds per second
+  trail: 40, // Afterglow percentage
+  className: 'spinner', // The CSS class to assign to the spinner
+  top: '500%'
+};
+
+var target = document.getElementById(chartConfig.target);
+
+// callback function wrapped for loader in 'init' function
+function init() {
+
+    // trigger loader
+    var spinner = new Spinner(opts).spin(target);
+
+    // slow the json load intentionally, so we can see it every load
+    setTimeout(function() {
+
+        // load json data and trigger callback
+        d3.text(chartConfig.data_url, function(data) {
+
+            // stop spin.js loader
+            spinner.stop();
+
+            // instantiate chart within callback
+            var parsedCSV = d3.csv.parseRows(data);
+
+    var container = d3.select("#"+chartConfig.target)
+        .append("table")
+
+    .selectAll("tr")
+        .data(parsedCSV).enter()
+        .append("tr")
+
+    .selectAll("td")
+        .data(function(d) {
+            return d;
+        }).enter()
+        .append("td")
+        .text(function(d) {
+            return d;
+        });
+
+        });
+
+    }, 1500);
+}
+
+init();
+
+    /*d3.text("https://raw.githubusercontent.com/RaihanSabique/agency-performance-model/master/dataset/data.csv", function(data) {
     var parsedCSV = d3.csv.parseRows(data);
 
     var container = d3.select("#dataloader")
@@ -97,8 +159,8 @@
         .append("td")
         .text(function(d) {
             return d;
-        });
-});
+        });*/
+//});
         </script>
 
 
